@@ -39,8 +39,7 @@ class Akun_Karyawan {
             }
             if(err) console.log('ada kesalahan saat membuat access_token')
         })
-        res.cookie('token', 'djshdjshd')
-        
+        res.cookie('token','tknsadasdsa')      
                
        })
 
