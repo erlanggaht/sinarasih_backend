@@ -9,7 +9,8 @@ const app = express()
 const corsOptions ={
   origin: ['https://sinarasih-backend.vercel.app/'],
   credentials: true,
-  sameSite: 'none'
+  sameSite: 'none',
+  
 }
 app.use(cors(corsOptions))
 
