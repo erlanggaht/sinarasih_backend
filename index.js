@@ -7,10 +7,9 @@ import cors from 'cors'
 
 const app = express()
 const corsOptions ={
-  origin : "*",
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200,
-  methods : "GET,POST, OPTIONS, PUT, PATCH, DELETE",
+  origin: ['https://sinarasih-backend.vercel.app/'],
+  credentials: true,
+  sameSite: 'none'
 }
 app.use(cors(corsOptions))
 
