@@ -1,6 +1,7 @@
 import { query_getdata } from "../controllers/karyawan_API.js"
 import { Client } from "../models/postgress_connect.js"
 
+// Validasi jika rows tidak di isi
 async function defaultValueRows(valueQuery) {
     const resultQuery =await Client.query(`${query_getdata} where id = '${valueQuery}'`) 
             

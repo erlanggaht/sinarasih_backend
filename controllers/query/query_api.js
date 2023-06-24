@@ -1,11 +1,20 @@
-import capitalize from "../utility/capitalize.js"
-import defaultValueRows from "../utility/getDefaultValueRows.js"
+import capitalize from "../../utility/capitalize.js"
+import defaultValueRows from "../../utility/getDefaultValueRows.js"
 
-class Query {
+class Query_Api {
 
     // Query Ambil Data
     static query_getdata = 'SELECT * FROM data_karyawan'
 
+    // Query Ambil Data Bedasarkan Token
+    static query_getdataToken = (Authorization_Bearer) => {
+        return `SELECT * FROM akun_karyawan where akses_token = '${Authorization_Bearer}'`
+    }
+
+    // Query Ambil Data Berdasarkan Token ID Admin
+    static query_getdataIdAdmin = (id_admin) => {
+        return `SELECT * FROM data_karyawan where id = '${id_admin}' `
+    }
 
     // Query Ambil Data Berdasarkan ID dan nama  
     static query_getDataNama = (id,nama) => {
@@ -40,8 +49,7 @@ class Query {
         return `DELETE from data_karyawan where id = ${id} and nama = '${capitalize(nama)}' `
     }
 
-
 }
 
 
-export default Query
+export default Query_Api

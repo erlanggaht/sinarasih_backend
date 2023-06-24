@@ -1,5 +1,5 @@
 import { Client } from "../models/postgress_connect.js"
-import Query from "./query.js"
+import Query_Api from "./query/query_api.js"
 
 
 // Query
@@ -7,8 +7,10 @@ export const {
     query_getdata,
     query_addData,
     query_deleteData,
-    query_updateData
-} = Query
+    query_updateData,
+    query_getdataIdAdmin,
+    query_getdataToken
+} = Query_Api
 
 class Karyawan {
 
@@ -21,13 +23,24 @@ class Karyawan {
        })
    }
 
-    static async addKaryawan (req,res) {
-        const {nama,deskripsi,posisi,ig} = req.body
-        const query = Client.query(await query_addData(nama,deskripsi,posisi,ig),(err) => {
-           if(!err) res.status(201).json({message:'data berhasil dimasukan'})
-           if(err) res.status(400).json({messageError:'ada kesalahan saat memasukan data karyawan'})
-        })
-    }
+   static async getKaryawan_token (req,res) {
+    const headers = req.headers
+    const Authorization_Bearer = req.headers.authorization && headers.authorization.split(' ')[1]
+    
+    const queryIfToken =  Client.query(query_getdataToken(Authorization_Bearer), (err,result)=>{
+        if(result.rows && result.rowCount > 0) {
+          const id_admin = result.rows[0].id
+          const query =  Client.query(query_getdataIdAdmin(id_admin),(err,result) => {
+              if(!err) {
+               res.status(200).json(result.rows)
+           }
+              if(err) res.status(400).send({messageError:'ada kesalahan saat ambil data karyawan'})
+          })
+      }
+      else  res.status(401).send('No Authorization your data')
+     })
+   }
+
  
     static async UpdateKaryawan (req,res) {
         const {nama,deskripsi,ig,posisi} = req.body

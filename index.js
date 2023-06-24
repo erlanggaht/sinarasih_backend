@@ -6,13 +6,9 @@ import router from './router/route.js'
 import cors from 'cors'
 
 const app = express()
-const corsOptions ={
-  origin: ['https://sinarasih-backend.vercel.app/'],
-  credentials: true,
-  sameSite: 'none',
-  
-}
-app.use(cors(corsOptions))
+
+app.use(cors())
+
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
