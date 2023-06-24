@@ -52,7 +52,7 @@ class Akun_Karyawan {
             if(err) console.log('ada kesalahan saat membuat refresh_token')
         })
         const create_accesstoken =  jwt.sign({name : username},process.env.TOKEN_RAHASIA,{
-            expiresIn : '20s',
+            expiresIn : '1h',
             algorithm : "HS256"
         },(err,token) => {
             if(token) {
