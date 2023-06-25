@@ -40,7 +40,7 @@ class Akun_Karyawan {
     static loginAkun =  (req,res) => {
        const {username,password} = req.body 
        const getUser =  Client.query(query_addAkunKaryawan(username,password),(err,result) => {
-        if(!result.rowCount) return res.status(401).json({message:"akun belum terdaftar. silahkan daftar"})
+        if(result && result.rowCount === 0) return res.status(401).json({message:"akun belum terdaftar. silahkan daftar"})
         // Jika Berhasil Login 
         const create_refreshtoken =  jwt.sign({name : username},process.env.TOKEN_RAHASIA,{
             expiresIn : '1h',

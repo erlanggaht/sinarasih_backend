@@ -29,17 +29,13 @@ class Query_Api {
 
 
     // Query Update Data
-    static query_updateData = async (nama,deskripsi,posisi,ig,image,valueQuery) => {
-        
-        const getDefaultValues = JSON.parse(await defaultValueRows(valueQuery))
-        const {id_, nama_, deskripsi_ ,ig_ ,posisi_ } = getDefaultValues
-
+    static query_updateData =  (nama,deskripsi,ig,posisi,id) => {
         return `UPDATE data_karyawan set
-        nama = '${!nama ? nama_ : nama}',
-        deskripsi = '${!deskripsi ? deskripsi_: deskripsi}',
-        ig = '${!ig ? ig_ : ig}',
-        posisi = '${!posisi ? posisi_ : posisi}'
-        where id = ${valueQuery}
+        nama = '${nama}',
+        deskripsi = '${deskripsi}',
+        ig = '${ig}',
+        posisi = '${posisi}'
+        where id = ${id}
         `
        } 
 

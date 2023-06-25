@@ -43,10 +43,8 @@ class Karyawan {
 
  
     static async UpdateKaryawan (req,res) {
-        const {nama,deskripsi,ig,posisi} = req.body
-        const namaQuery = Object.keys(req.query)[0] // NamaQuery misal {dede : 1} >>> 'dede'
-        const valueQuery = req.query[namaQuery] // Menghasilkan value namaQuery
-        const query =  Client.query(await query_updateData(nama,deskripsi,ig,posisi,valueQuery),(err,result) => {
+        const {nama,deskripsi,ig,posisi,id} = req.body
+        const query =  Client.query(await query_updateData(nama,deskripsi,ig,posisi,id),(err,result) => {
             if(!err) res.status(200).json({message:`data  berhasil di ubah`})
             if(err) res.status(400).json({messageError:'ada kesalahan saat ubah data karyawan'})
          })
