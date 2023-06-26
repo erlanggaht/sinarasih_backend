@@ -1,5 +1,4 @@
 import capitalize from "../../utility/capitalize.js"
-import defaultValueRows from "../../utility/getDefaultValueRows.js"
 
 class Query_Api {
 
@@ -42,7 +41,7 @@ class Query_Api {
 
     // Query Hapus Data 
     static query_deleteData = (id,nama) =>  {
-        return `DELETE from data_karyawan where id = ${id} and nama = '${capitalize(nama)}' `
+        return `DELETE from data_karyawan where id = '${id}' and nama = '${nama}' `
     }
 
 }

@@ -14,7 +14,7 @@ class Query_Akun {
     }
 
     //  Query Get akun karyawan berdasar nama dan password
-    static query_addAkunKaryawan(username,password) {
+    static query_getAkunKaryawan(username,password) {
         return  `SELECT * FROM akun_karyawan where username = '${username}' and password = '${password}'`
 
     }
