@@ -21,8 +21,8 @@ class Query_Api {
     }
 
     // Query Masukan Data
-    static query_addData =  (nama,deskripsi,posisi,ig) => {
-     return  `INSERT INTO data_karyawan (id,nama,deskripsi,posisi,ig) VALUES(default,'${nama}','${deskripsi}','${posisi}','${ig}')`
+    static query_addData =  (nama,deskripsi,posisi,ig,OptimizeImage) => {
+     return  `INSERT INTO data_karyawan (id,nama,deskripsi,posisi,ig,image) VALUES(default,'${nama}','${deskripsi}','${posisi}','${ig}','${OptimizeImage}')`
         
     } 
 

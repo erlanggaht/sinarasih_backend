@@ -13,7 +13,7 @@ router.get('/',(req,res)=>{
     res.send('Hello ini endpoint API root sinar asih.')
 })
 // Ambil Data Karyawan
-router.get('/getKaryawan',Auth_getKaryawan,Karyawan.getKaryawan)
+router.get('/getKaryawan',Karyawan.getKaryawan)
 
 // Ambil Data Berdasarkan Token
 router.get('/getKaryawanToken',Auth_getKaryawan,Karyawan.getKaryawan_token)

@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import Query_Akun from "./query/query_akun.js";
 import Query_Api from "./query/query_api.js";
 import enkrip_hash, { enkrip_compare } from "../utility/bacrypt.js";
-
+import cloudinary from 'cloudinary'
 // Query
 export const {
   query_getTokenMasterAdmin,
@@ -17,10 +17,20 @@ export const { query_addData } = Query_Api;
 
 class Akun_Karyawan {
   // Tambah Akun
-  static addAkun = (req, res) => {
-    const { username, password, token, nama, deskripsi, posisi, ig } = req.body;
+  static addAkun = async (req, res) => {
+    const { username, password, token, nama, deskripsi, posisi, ig, CloudinaryID} = req.body;
 
-    //    Hashing Password
+    
+   // Cloudinary Setup
+    const response = await cloudinary.v2.api
+    .resource_by_asset_id([CloudinaryID])
+    var url_Image = response.secure_url
+    var toArray = url_Image.split('/upload/')
+    toArray.splice(1,0,'/upload/f_auto,q_auto/')
+    var OptimizeImage = toArray.join('')
+
+   
+      //  Hashing Password
     const password_hash = enkrip_hash(password);
 
     // Cek Token Master Admin
@@ -40,7 +50,7 @@ class Akun_Karyawan {
             (error, result) => {
               if (result.rowCount > 0) {
                 const query_add = Client.query(
-                  query_addData(nama, deskripsi, posisi, ig),
+                  query_addData(nama, deskripsi, posisi, ig,OptimizeImage),
                   (err) => {
                     if (!err)
                       res

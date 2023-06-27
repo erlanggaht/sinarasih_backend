@@ -1,8 +1,7 @@
 import { Client } from "../models/postgress_connect.js"
 import Query_Akun from "./query/query_akun.js"
 import Query_Api from "./query/query_api.js"
-
-
+import cloudinary from 'cloudinary'
 // Query
 export const {
     query_getdata,
@@ -19,7 +18,11 @@ export const {
 
 class Karyawan {
 
+
+
     static getKaryawan (req,res) {
+
+        
        const query =  Client.query(query_getdata,(err,result) => {
            if(!err) {
             res.status(200).json(result.rows)
