@@ -18,35 +18,15 @@ export const { query_getTokenMasterAdmin } = Query_Akun;
 class Karyawan {
   static getKaryawan(req, res) {
   
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // const query = Client.query(query_getdata, (err, result) => {
-    //   if (!err) {
-    //     res.status(200).json(result.rows);
-    //   }
-    //   if (err)
-    //     res
-    //       .status(400)
-    //       .send({ messageError: "ada kesalahan saat ambil data karyawan" });
-    // });
+    const query = Client.query(query_getdata, (err, result) => {
+      if (!err) {
+        res.status(200).json(result.rows);
+      }
+      if (err)
+        res
+          .status(400)
+          .send({ messageError: "ada kesalahan saat ambil data karyawan" });
+    });
   }
 
   static async getKaryawan_token(req, res) {
