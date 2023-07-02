@@ -21,19 +21,20 @@ class Query_Api {
     }
 
     // Query Masukan Data
-    static query_addData =  (nama,deskripsi,posisi,ig,OptimizeImage) => {
-     return  `INSERT INTO data_karyawan (id,nama,deskripsi,posisi,ig,image) VALUES(default,'${nama}','${deskripsi}','${posisi}','${ig}','${OptimizeImage}')`
+    static query_addData =  (nama,deskripsi,posisi,ig) => {
+     return  `INSERT INTO data_karyawan (id,nama,deskripsi,posisi,ig) VALUES(default,'${nama}','${deskripsi}','${posisi}','${ig}')`
         
     } 
 
 
     // Query Update Data
-    static query_updateData =  (nama,deskripsi,ig,posisi,id) => {
+    static query_updateData =  (nama,deskripsi,ig,posisi,id,OptimizeImage) => {
         return `UPDATE data_karyawan set
         nama = '${nama}',
         deskripsi = '${deskripsi}',
         ig = '${ig}',
-        posisi = '${posisi}'
+        posisi = '${posisi}',
+        image = '${OptimizeImage}'
         where id = ${id}
         `
        } 

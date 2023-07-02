@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import Query_Akun from "./query/query_akun.js";
 import Query_Api from "./query/query_api.js";
 import enkrip_hash, { enkrip_compare } from "../utility/bacrypt.js";
-import cloudinary from 'cloudinary'
+import cloudinary from "cloudinary";
 // Query
 export const {
   query_getTokenMasterAdmin,
@@ -18,19 +18,19 @@ export const { query_addData } = Query_Api;
 class Akun_Karyawan {
   // Tambah Akun
   static addAkun = async (req, res) => {
-    const { username, password, token, nama, deskripsi, posisi, ig, CloudinaryID} = req.body;
+    const {
+      username,
+      password,
+      token,
+      nama,
+      deskripsi,
+      posisi,
+      ig,
+    } = req.body;
 
-    
-   // Cloudinary Setup
-    const response = await cloudinary.v2.api
-    .resource_by_asset_id([CloudinaryID])
-    var url_Image = response.secure_url
-    var toArray = url_Image.split('/upload/')
-    toArray.splice(1,0,'/upload/f_auto,q_auto/')
-    var OptimizeImage = toArray.join('')
+  
 
-   
-      //  Hashing Password
+    //  Hashing Password
     const password_hash = enkrip_hash(password);
 
     // Cek Token Master Admin
@@ -38,31 +38,27 @@ class Akun_Karyawan {
       query_getTokenMasterAdmin(token),
       (err, result) => {
         if (result.rowCount === 0) {
-          res
-            .status(401)
-            .json({
-              message:
-                "Token Karyawan Salah! silahkan tanyakan ke yg bersangkutan",
-            });
+          res.status(401).json({
+            message:
+              "Token Karyawan Salah! silahkan tanyakan ke yg bersangkutan",
+          });
         } else {
           const query = Client.query(
             query_addAkunKaryawan(username, password_hash),
             (error, result) => {
               if (result.rowCount > 0) {
                 const query_add = Client.query(
-                  query_addData(nama, deskripsi, posisi, ig,OptimizeImage),
+                  query_addData(nama, deskripsi, posisi, ig),
                   (err) => {
                     if (!err)
                       res
                         .status(201)
                         .json({ message: "daftar akun karyawan berhasil" });
                     if (err)
-                      res
-                        .status(400)
-                        .json({
-                          messageError:
-                            "ada kesalahan saat memasukan data karyawan",
-                        });
+                      res.status(400).json({
+                        messageError:
+                          "ada kesalahan saat memasukan data karyawan",
+                      });
                   }
                 );
               } else
