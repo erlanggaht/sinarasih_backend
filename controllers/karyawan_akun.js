@@ -46,8 +46,7 @@ class Akun_Karyawan {
             query_addAkunKaryawan(username, password_hash),
             (error, result) => {
               if (result.rowCount > 0) {
-                const query_add = Client.query(
-                  query_addData(nama, deskripsi, posisi, ig),
+                const query_add = Client.query(query_addData(nama, deskripsi, posisi, ig),
                   (err) => {
                     if (!err)
                       res
