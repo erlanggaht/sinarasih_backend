@@ -53,6 +53,7 @@ class Akun_Karyawan {
                         .status(201)
                         .json({ message: "daftar akun karyawan berhasil" });
                     if (err)
+                    console.log(err)
                       res.status(400).json({
                         messageError:
                           "ada kesalahan saat memasukan data karyawan",
