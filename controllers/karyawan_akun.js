@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 import Query_Akun from "./query/query_akun.js";
 import Query_Api from "./query/query_api.js";
 import enkrip_hash, { enkrip_compare } from "../utility/bacrypt.js";
-import cloudinary from "cloudinary";
 // Query
 export const {
   query_getTokenMasterAdmin,
@@ -76,9 +75,7 @@ class Akun_Karyawan {
     const { username, password } = req.body;
 
     //    Compare hash Password
-    const get_password_compare = Client.query(
-      `SELECT password FROM akun_karyawan where username = '${username}' `,
-      (err, result) => {
+    const get_password_compare = Client.query(`SELECT password FROM akun_karyawan where username = '${username}' `,(err, result) => {
         if (result.rowCount < 1)
           res.status(400).json({ message: "username tidak terdaftar" });
         else {
@@ -87,12 +84,10 @@ class Akun_Karyawan {
 
           if (password_compare) {
             const getUser = Client.query(
-              query_getAkunKaryawan(username, password_hash),
-              (err, result) => {
+              query_getAkunKaryawan(username, password_hash), (err, result) => {
                 if (result.rowCount === 0)
                   return res
-                    .status(401)
-                    .json({ message: "akun belum terdaftar. silahkan daftar" });
+                    .status(401).json({ message: "akun belum terdaftar. silahkan daftar" });
                 // Jika Berhasil Login
                 const create_refreshtoken = jwt.sign(
                   { name: username },
