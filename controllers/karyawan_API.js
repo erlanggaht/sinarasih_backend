@@ -33,13 +33,11 @@ class Karyawan {
     const headers = req.headers;
     const Authorization_Bearer = req.headers.authorization && headers.authorization.split(" ")[1];
 
-    const queryIfToken = Client.query(query_getdataToken(Authorization_Bearer),
-      (err, result) => {
+    const queryIfToken = Client.query(query_getdataToken(Authorization_Bearer),(err, result) => {
         if (result.rowCount > 0) {
           const id_admin = result.rows[0].id;
           const query = Client.query(
-            query_getdataIdAdmin(id_admin),
-            (err, result) => {
+            query_getdataIdAdmin(id_admin),(err, result) => {
               if (!err) {
                 res.status(200).json(result.rows);
               }

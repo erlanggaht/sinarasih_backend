@@ -7,17 +7,17 @@ class Query_Api {
 
     // Query Ambil Data Bedasarkan Token
     static query_getdataToken = (Authorization_Bearer) => {
-        return `SELECT * FROM akun_karyawan where akses_token = '${Authorization_Bearer}'`
+        return `SELECT * FROM akun_karyawan where akses_token = '${Authorization_Bearer}' `
     }
 
     // Query Ambil Data Berdasarkan Token ID Admin
     static query_getdataIdAdmin = (id_admin) => {
-        return `SELECT * FROM data_karyawan where id = '${id_admin}' `
+        return `SELECT * FROM data_karyawan where id = ${id_admin} `
     }
 
     // Query Ambil Data Berdasarkan ID dan nama  
     static query_getDataNama = (id,nama) => {
-        return `SELECT * FROM data_karyawan WHERE id=${id} AND nama=${nama}   `
+        return `SELECT * FROM data_karyawan WHERE id=${id} AND nama='${nama}'   `
     }
 
     // Query Masukan Data
