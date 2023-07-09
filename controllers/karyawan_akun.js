@@ -75,7 +75,7 @@ class Akun_Karyawan {
 
     //    Compare hash Password
     const get_password_compare = Client.query(`SELECT password FROM akun_karyawan where username = '${username}' `,(err, result) => {
-        if (result.rowCount < 1)
+      if (result.rowCount < 1)
           res.status(400).json({ message: "username tidak terdaftar" });
         else {
           const password_hash = result.rows[0].password;
